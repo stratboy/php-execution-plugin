@@ -1,6 +1,6 @@
 <?php
 
-define('PHP_EXECUTION_VERSION', '0.9.2');
+define('PHP_EXECUTION_VERSION', '0.9.3');
 
 class php_execution
 {
@@ -19,6 +19,12 @@ class php_execution
 	*/
 	function php_execution()
 	{
+		/*
+		 * TinyMce hook - load js file 
+		 * bug fix -> moved outside "if(WP_ADMIN)" for compatibility with WP version 2.5
+		 */
+		add_action('mce_external_plugins', array(&$this,'action_mce_external_plugins'));
+		
 		if( defined('WP_ADMIN') )
 		{
 			// installation
@@ -29,8 +35,7 @@ class php_execution
 			// Administration Area
 			add_action('admin_menu', array(&$this,'action_admin_menu'));
 			
-			// TinyMce hooks
-			add_action('mce_external_plugins', array(&$this,'action_mce_external_plugins'));
+			// TinyMce hook
 			add_action('the_editor_content', array(&$this,'action_the_editor_content'), 1);
 			
 			// init

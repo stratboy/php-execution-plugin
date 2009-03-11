@@ -3,7 +3,7 @@
 Plugin Name: PHP Execution
 Plugin URI: http://www.zehnet.de/
 Description: The PHP Execution Plugin allows users to write php code inside their posts and pages. Embedded php code will be executed when the post is shown. In doing so, the plugin offers the possibility to utilize dynamic content inside of posts. <strong>This plugin does not require to turn off the visual editor</strong>.
-Version: 0.9.2
+Version: 0.9.3
 Author: Nicolas Zeh
 Author URI: http://www.zehnet.de/
 */
