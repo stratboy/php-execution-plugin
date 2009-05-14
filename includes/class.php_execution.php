@@ -1,6 +1,6 @@
 <?php
 
-define('PHP_EXECUTION_VERSION', '0.9.3');
+define('PHP_EXECUTION_VERSION', '1.0.0');
 
 class php_execution
 {
@@ -25,6 +25,13 @@ class php_execution
 		 */
 		add_action('mce_external_plugins', array(&$this,'action_mce_external_plugins'));
 		
+		global $pagenow;
+		
+		if ( $pagenow && in_array( $pagenow, array('post.php', 'post-new.php', 'page.php', 'page-new.php') ) )
+		{
+			add_action( 'admin_print_scripts', array(&$this,'action_admin_print_scripts') );
+		}
+		
 		if( defined('WP_ADMIN') )
 		{
 			// installation
@@ -35,7 +42,7 @@ class php_execution
 			// Administration Area
 			add_action('admin_menu', array(&$this,'action_admin_menu'));
 			
-			// TinyMce hook
+			// TinyMce hooks
 			add_action('the_editor_content', array(&$this,'action_the_editor_content'), 1);
 			
 			// init
@@ -163,7 +170,7 @@ class php_execution
 	}
 
 	/**
-	 * action handler called when a new postis submitted / or edited
+	 * add PHP Execution options page to the admin section
 	*/
 	function action_admin_menu()
 	{
@@ -171,7 +178,19 @@ class php_execution
 	}
 
 	/**
-	 * load Editor JS for wp_php
+	 * admin_print_scripts action. 
+	 * Used to add the baseURL for the plugin.
+	 * Bug fix for cases where the WP_PLUGIN directory does not reside at its usual place.
+	 *
+	 * see: admin-header.php [71] - do_action('admin_print_scripts');
+	*/
+	function action_admin_print_scripts()
+	{
+		echo '<script type="text/javascript">/* <![CDATA[ */ phpExecutionBaseUrl="'. PHP_EXECUTION_BASE_URL .'"; /* ]]> */</script>';
+	}
+
+	/**
+	 * load editor plugin javascript
 	*/
 	function action_mce_external_plugins($content)
 	{
