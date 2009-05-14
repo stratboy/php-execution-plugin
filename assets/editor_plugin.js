@@ -110,7 +110,8 @@ if(typeof(wpTinyMceEditor) == 'undefined')
  */
 phpExecution = {
 	
-	baseUrl: '../wp-content/plugins/php_execution',
+	// Fix: no hard coded relative url anymore, but a reference to a variable globaly set with "admin_head" callback
+	baseUrl: phpExecutionBaseUrl,
 	
 	/**
 	 * initializer
