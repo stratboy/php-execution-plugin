@@ -2,8 +2,8 @@
 Contributors: nzeh
 Tags: php, code, execution, exec, run, eval 
 Requires at least: 2.5
-Tested up to: 2.8
-Stable tag: 1.0.0
+Tested up to: 2.8.3
+Stable tag: 1.0.1
 
 The PHP Execution plugin allows embedding php code inside of posts and pages.
 
@@ -18,7 +18,7 @@ Features:
 
 * executes php code in your posts and pages (full, excerpts, feeds).
 * integrates well with Wordpress' visual editor. No need to turn it off.
-* write php code in the usual `<?php ... ?>` syntax in the html view of the editor.
+* write php code in the usual '<?php ... ?>' syntax in the html view of the editor.
 * admin section to edit the blog users' php execution rights.
 * plugin automatically prevents users with no php execution rights to edit posts of users with rights to execute php code.
 
@@ -29,7 +29,7 @@ Further information at [zehnet.de: PHP Execution Plugin home](http://www.zehnet.
 == Installation ==
 
 * Download the latest version of the plugin.
-* Unzip it into the `/wp-content/plugins/` folder of your Wordpress installation resulting in a `/wp-content/plugins/php_execution/` folder.
+* Unzip it into the '/wp-content/plugins/' folder of your Wordpress installation resulting in a '/wp-content/plugins/php_execution/' folder.
 * Login as administrator and activate the plugin.
 * Wordpress' tag balancing has to be turned **off**. It is by default. If you have enabled tag balancing, turn it off again by unchecking "WordPress should correct invalidly nested XHTML automatically" in Settings>>Writing of the admin section.
 * Optionally set PHP execution permissions in the Settings>>PHP Execution panel. By default all administrators possess the permission to execute php code.
@@ -38,15 +38,15 @@ Further information at [zehnet.de: PHP Execution Plugin home](http://www.zehnet.
 == Editing PHP code ==
 
 * php code can be edited in the html view of the editor.
-* php code is embedded into a post in the same way as you are used to: a php block begins with `<?php` and ends with `?>`. The short open tag, i.e. `<?`, is not supported.
-* One restriction is, that you are not allowed to use the ending delimeter (`?>`) somewhere inside a string in your php code block. If you do so, this ending delimeter will be matched and your code will inevitably break apart. So don’t write e.g.:
+* php code is embedded into a post in the same way as you are used to: a php block begins with '<?php' and ends with '?>'. The short open tag, i.e. '<?', is not supported.
+* One restriction is, that you are not allowed to use the ending delimeter ('?>') somewhere inside a string in your php code block. If you do so, this ending delimeter will be matched and your code will inevitably break apart. So don’t write e.g.:
 <pre>
     some text
     &lt;?php $test = "hello ?&gt;"  ?&gt;
     more text
 </pre>
-* Writing `$test = "hello ?&amp;gt;"` instead will not lead to any problems.
-* Php code is not executed in the global scope. If you need to gain access to variables in the global scope you need to "import" them first with `global $var1, $var2;`.
+* Writing '$test = "hello ?&amp;gt;"' instead will not lead to any problems.
+* Php code is not executed in the global scope. If you need to gain access to variables in the global scope you need to "import" them first with 'global $var1, $var2;'.
 * This plugin does not evaluate every single code snippet, but the content of the post as a whole. So the following lines won’t result in errors:
 <pre>
     &lt;?php if ($test==true) { ?&gt;

@@ -1,6 +1,6 @@
 <?php
 
-define('PHP_EXECUTION_VERSION', '1.0.0');
+define('PHP_EXECUTION_VERSION', '1.0.1');
 
 class php_execution
 {
@@ -94,9 +94,12 @@ class php_execution
 	*/
 	function action_init()
 	{
-		global $current_user;
+		/*
+		 * bug fix(1.0.1) -> don't use $current_user global as it might not already be created
+		 */
+		$current_user = wp_get_current_user();
 		
-		$this->current_user_can_exec_php = $current_user->has_cap(PHP_EXECUTION_CAPABILITY);
+		$this->current_user_can_exec_php = (!empty($current_user) && $current_user->has_cap(PHP_EXECUTION_CAPABILITY));
 		
 		$this->options = get_option(PHP_EXECUTION_OPTION);
 		
